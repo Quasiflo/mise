@@ -109,14 +109,14 @@ impl Backend for VfoxBackend {
         if self.is_backend_plugin() {
             Settings::get().ensure_experimental("custom backends")?;
             let tool_name = self.get_tool_name()?;
-            let opts = tv.request.options();
+            let tool_opts = tv.request.options();
             vfox.backend_install(
                 &self.pathname,
                 tool_name,
                 &tv.version,
                 tv.install_path(),
                 tv.download_path(),
-                opts.opts.clone(),
+                tool_opts.opts.clone(),
             )
             .await
             .wrap_err("Backend install method failed")?;
